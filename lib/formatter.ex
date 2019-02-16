@@ -7,13 +7,16 @@ defmodule Formatter do
   defp to_two_digits(value) do
     digits = value_length(value)
 
-    cond do
-      digits < 2 -> "0#{value}"
-      true -> value
+    if digits < 2 do
+      "0#{value}"
+    else
+      value
     end
   end
 
   defp value_length(value) do
-    Integer.digits(value) |> Enum.count()
+    value
+    |> Integer.digits()
+    |> Enum.count()
   end
 end

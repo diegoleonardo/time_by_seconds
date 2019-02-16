@@ -1,12 +1,16 @@
 defmodule Processor do
-  def main(value) do
-    value
+  def main(value_in_secondes, value_to_divide) do
+    value_to_process = value_in_secondes / value_to_divide
+
+    value_to_process
     |> Float.floor()
     |> trunc
   end
 
-  def secondary(value) do
-    value
+  def secondary(value_in_secondes, value_to_divide) do
+    value_to_process = value_in_secondes / value_to_divide
+
+    value_to_process
     |> Float.to_string()
     |> String.split(".")
     |> Enum.at(1)

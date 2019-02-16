@@ -44,13 +44,9 @@ defmodule TimeBySeconds do
   """
   def calculate(seconds)
       when seconds >= @one_minute_in_seconds and seconds < @one_hour_in_seconds do
-    minute =
-      (seconds / @one_minute_in_seconds)
-      |> Processor.main()
+    minute = Processor.main(seconds, @one_minute_in_seconds)
 
-    seconds =
-      (seconds / @one_minute_in_seconds)
-      |> Processor.secondary()
+    seconds = Processor.secondary(seconds, @one_minute_in_seconds)
 
     Formatter.show([0, minute, seconds])
   end
@@ -65,19 +61,11 @@ defmodule TimeBySeconds do
 
   """
   def calculate(seconds) when seconds >= @one_hour_in_seconds do
-    value = seconds / @one_hour_in_seconds
+    hour = Processor.main(seconds, @one_hour_in_seconds)
 
-    hour =
-      value
-      |> Processor.main()
+    minutes = Processor.secondary(seconds, @one_hour_in_seconds)
 
-    minutes =
-      value
-      |> Processor.secondary()
-
-    seconds =
-      (seconds / @one_minute_in_seconds)
-      |> Processor.secondary()
+    seconds = Processor.secondary(seconds, @one_minute_in_seconds)
 
     Formatter.show([hour, minutes, seconds])
   end
